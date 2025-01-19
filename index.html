@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>macOS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <img src="media/background.png" id="wallpaper" alt="Cautious Enigma">
+  
+  <div class="navCon">
+    <nav class="menuBar">
+      <div id="textBar">
+        <img src="media/bar/icons8-apple-logo.svg">
+      <div class="menuBarText" style="font-weight: bold;">Shortcuts</div>
+      <div class="menuBarText">File</div>
+      <div class="menuBarText">Edit</div>
+      <div class="menuBarText">Shortcut</div>
+      <div class="menuBarText">View</div>
+      <div class="menuBarText">Window</div>
+      <div class="menuBarText">Help</div>  
+    </div>
+      <div id="emptyBar"></div>
+      <div id="iconBar">
+        <img class="menuBarImg" src="media/bar/icons8-empty-battery-50.png">
+        <img class="menuBarImg" src="media/bar/icons8-wi-fi-50.png">
+        <img class="menuBarImg" src="media/bar/icons8-search.svg">
+        <div class="menuBarImg" id="day">mon</div>
+        <div class="menuBarImg" id="month">jun</div>
+        <div class="menuBarImg" id="date">7</div>
+        <div class="menuBarImg" id="time">9:41 AM</div>
+      </div>
+    </nav>
+  </div>
+  <div class="navCon">
+    <nav class="dock">
+      <div class="dockIconCon">
+        <img src="media/dock/icons8-safari-96.png" style="scale: .85;" class="dockIcon">
+      </div>
+      <div class="dockIconCon">
+        <img src="media/dock/icons8-ios-photos.svg" class="dockIcon">
+      </div>
+      <div class="dockIconCon">
+        <img src="media/dock/icons8-app-store.svg" style="scale: 1.2;" class="dockIcon">
+      </div>
+      <div class="dockIconCon">
+        <img src="media/dock/icons8-messages.svg" style="transform: scale(1.2);" class="dockIcon">
+      </div>
+      <div class="dockIconCon">
+      <img src="media/dock/icons8-settings.svg" class="dockIcon">
+    </div>
+    </nav>
+  </div>
+
+<div id="notesApp">
+  <input type="text" style="translate: 30vw 30vh;">
+</div>
+
+  <script>
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function updateDateTime() {
+        const now = new Date();
+        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        // Extract and format current time and date
+        const day = capitalizeFirstLetter(days[now.getDay()].toLowerCase());
+        const month = capitalizeFirstLetter(months[now.getMonth()].toLowerCase());
+        const date = now.getDate();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const formattedTime = `${hours % 12 || 12}:${minutes.toString().padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
+
+        // Update the DOM
+        document.getElementById('day').textContent = day;
+        document.getElementById('month').textContent = month;
+        document.getElementById('date').textContent = date;
+        document.getElementById('time').textContent = formattedTime;
+    }
+
+    // Update immediately on load
+    updateDateTime();
+    // Optionally, update time every minute
+    setInterval(updateDateTime, 60000);
+
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const dockIcons = document.querySelectorAll(".dock .dockIconCon");
+
+  dockIcons.forEach((icon, index) => {
+    icon.addEventListener("mouseenter", () => {
+      // Reset all icons to their default size
+      dockIcons.forEach(icon => (icon.style.transform = "scale(1)"));
+
+      // Scale the hovered icon
+      icon.style.transform = "scale(1.33)";
+
+      // Scale the previous neighbor (if it exists)
+      if (index > 0) {
+        dockIcons[index - 1].style.transform = "scale(1.05)";
+      }
+
+      // Scale the next neighbor (if it exists)
+      if (index < dockIcons.length - 1) {
+        dockIcons[index + 1].style.transform = "scale(1.05)";
+      }
+    });
+  });
+
+  // Reset all sizes when the mouse leaves the dock container
+  document.querySelector(".dock").addEventListener("mouseleave", () => {
+    dockIcons.forEach(icon => (icon.style.transform = "scale(1)"));
+  });
+});
+</script>
+
+<script>
+const div = document.getElementById("notesApp");
+
+let isDragging = false;
+let offsetX, offsetY;
+
+div.addEventListener("mousedown", (e) => {
+  // Start dragging only if the clicked target is not an interactive element
+  if (e.target.tagName === "INPUT" || e.target.tagName === "BUTTON" || e.target.isContentEditable) {
+    return;
+  }
+
+  isDragging = true;
+  div.style.cursor = "grabbing";
+
+  // Calculate the offset between mouse pointer and the div's top-left corner
+  offsetX = e.clientX - div.getBoundingClientRect().left;
+  offsetY = e.clientY - div.getBoundingClientRect().top;
+
+  // Prevent text selection during drag
+  e.preventDefault();
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  // Calculate the new position
+  const left = e.clientX - offsetX;
+  const top = e.clientY - offsetY;
+
+  // Update the position of the div
+  div.style.left = `${left}px`;
+  div.style.top = `${top}px`;
+});
+
+document.addEventListener("mouseup", () => {
+  if (isDragging) {
+    isDragging = false;
+    div.style.cursor = "grab";
+  }
+});
+
+</script>
+
+
+</body>
+</html>

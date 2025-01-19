@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}
+
+#wallpaper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+}
+/*dock*/
+.navCon {
+  display: flex;
+  justify-content: center;
+}
+.dock {
+  position: fixed;
+  bottom: 20px;
+  min-width: 512px;
+  background-color: rgba(180, 180, 180, 0.452);
+  border-radius: 15px;
+  box-shadow: 0 0 2rem rgba(78, 78, 78, 0.363);
+  display: flex;
+  justify-content: center;
+  padding-block: 12px;
+}
+.dockIconCon {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 8px;
+  border-radius: 15px;
+  padding: 4px;
+  margin-inline: 1px;
+  transition: all ease .25s;
+}
+.dockIconCon:hover {
+  background-color: rgba(219, 219, 219, 0.05);
+  transform: scale(1.5);
+  translate: 0 -12px;
+  box-shadow: 0 0 1rem rgba(77, 77, 77, 0.37);
+}
+.dockIcon {
+  height: 72px;
+  cursor: pointer;
+}
+
+.menuBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background-color: rgba(255, 255, 255, 0.623);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menuBar img {
+  height: 1rem;
+}
+
+#textBar {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 10px;
+}
+#emptyBar {
+  flex: 4;
+}
+#iconBar {
+  flex: .8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 10px;
+}
+#notesApp {
+  position: fixed;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  height: 60vh;
+  background-color: white;
+}
