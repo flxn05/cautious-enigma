@@ -92,5 +92,36 @@ body {
   left: 20vw;
   width: 60vw;
   height: 60vh;
-  background-color: white;
+  display: grid;
+  grid-template-columns: 12vw 1fr;
+  border-radius: 12px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, .5);
+  backdrop-filter: blur(12px);
+}
+header {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  color: white;
+  padding-inline: 4px;
+  padding-block: 2rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+header div {
+  height: 2rem;
+  padding-block: .4rem;
+  padding-inline: 2rem;
+  border-radius: 4px;
+}
+header div:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  text-shadow: 2px black;
+}
+main {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.9);
 }
